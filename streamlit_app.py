@@ -26,6 +26,7 @@ streamlit.dataframe(fruits_to_show)
 
 #New Section to display fruityvice api response
 streamlit.header('Fruityvice Fruit Advice!')
+
 # create a repeatable code block
 def get_fruityvice_data(this_fruit_choice):
       fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + this_fruit_choice)
@@ -48,9 +49,6 @@ except URLError as e:
 
 
 # output it to the screen as a table
-
-# don't run anything beyond this point while we troubleshoot
-
 streamlit.header('The fruit load list contains:')
 def get_fruit_load_list():
       with my_cnx.cursor() as my_cur:
@@ -61,7 +59,8 @@ if streamlit.button('Get Fruit Load List'):
       my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
       my_data_rows = get_fruit_load_list()
       streamlit.dataframe(my_data_rows)
-      
+
+# don't run anything beyond this point while we troubleshoot
 streamlit.stop()
 
 def insert_row_snowflake(new_fruit)
